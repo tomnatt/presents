@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Welcome <%= current_user.name %></h1>
+<ul class="list-unstyled">
+  <li><%= link_to 'Add a new present', new_present_path %></li>
+  <li><%= link_to 'Your presents', presents_path %></li>
+</ul>
+
+<h2>Everyone using this application</h2>
+
+<ul>
+  <% @users.each do |user| %>
+    <li><%= user.name %></li>
+  <% end %>
+</ul>
