@@ -27,7 +27,7 @@ class PresentsController < ApplicationController
     @present = Present.new(present_params)
 
     respond_to do |format|
-      if @present.save
+      if create_present
         format.html { redirect_to @present, notice: 'Present was successfully created.' }
         format.json { render :show, status: :created, location: @present }
       else
@@ -62,13 +62,19 @@ class PresentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_present
-      @present = Present.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def present_params
-      params.require(:present).permit(:title, :description, :url, :price)
-    end
+  def create_present
+    @present.user = current_user
+    @present.save
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_present
+    @present = Present.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def present_params
+    params.require(:present).permit(:title, :description, :url, :price)
+  end
 end
