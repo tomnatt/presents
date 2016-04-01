@@ -1,10 +1,11 @@
 class PresentsController < ApplicationController
   before_action :set_present, only: [:show, :edit, :update, :destroy]
+  before_action :check_authorisation, only: [:show, :edit, :update, :destroy]
 
   # GET /presents
   # GET /presents.json
   def index
-    @presents = Present.all
+    @presents = Present.where(user: current_user)
   end
 
   # GET /presents/1
@@ -71,6 +72,10 @@ class PresentsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_present
     @present = Present.find(params[:id])
+  end
+
+  def check_authorisation
+    redirect_to root_url unless @present.user == current_user
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
