@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160328171001) do
+ActiveRecord::Schema.define(version: 20160401181058) do
 
   create_table "presents", force: :cascade do |t|
     t.string   "title"
@@ -20,7 +20,10 @@ ActiveRecord::Schema.define(version: 20160328171001) do
     t.decimal  "price"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
+
+  add_index "presents", ["user_id"], name: "index_presents_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "provider"
