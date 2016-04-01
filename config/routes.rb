@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   root 'presents#index'
 
-  # By the power of omniauth
+  # Authentication by the power of omniauth
   get 'auth/:provider/callback', to: 'sessions#create'
-  get 'logout', to: 'sessions#destroy'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+  get 'auth/facebook', as: 'login'
 end
