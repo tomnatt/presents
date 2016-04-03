@@ -42,5 +42,8 @@ group :development do
   # gem 'sqlite3'
 end
 
+# For log viewing on Heroku
+gem 'rails_12factor', group: :production
+
 gem 'secure_headers'
 gem 'omniauth-facebook'
