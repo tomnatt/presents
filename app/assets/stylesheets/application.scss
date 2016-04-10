@@ -14,11 +14,14 @@
  *= require_self
  */
 
-.new-present {
-  float: right;
-  position: relative;
-  right: 10%;
-  top: -2em;
+// Copied Bootstrap default for small screen size
+@media (min-width: 768px) {
+  .new-present {
+    float: right;
+    position: relative;
+    right: 10%;
+    top: -2em;
+  }
 }
 
 table td {

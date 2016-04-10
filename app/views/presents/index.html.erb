@@ -1,6 +1,10 @@
 <h1>Presents for <%= current_user.name %></h1>
 
-<p id="notice"><%= notice %></p>
+<%- unless notice.blank? %>
+<div class="alert alert-warning col-sm-8">
+  <p id="notice"><%= notice %></p>
+</div>
+<%- end %>
 
 <%= link_to 'New Present', new_present_path, class: 'btn btn-primary btn-lg new-present' %>
 
