@@ -4,12 +4,13 @@
 
 <%= link_to 'New Present', new_present_path %>
 
-<table class="table table-hover">
+<table class="table table-hover table-striped">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Price</th>
-      <th></th>
+      <th class="col-md-2">Title</th>
+      <th class="col-md-2">Price</th>
+      <th class="col-md-2"></th>
+      <th class="col-md-1"></th>
     </tr>
   </thead>
 
@@ -19,6 +20,7 @@
         <td><%= link_to present.title, present %></td>
         <td><%= link_to present.price, present %></td>
         <td><%= link_to 'Edit', edit_present_path(present), class: 'edit-link' %></td>
+        <td><%= link_to 'Delete', '#', class: 'delete-link', data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
