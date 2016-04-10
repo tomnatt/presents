@@ -1,6 +1,10 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Presents for <%= current_user.name %></h1>
+
+<%- unless notice.blank? %>
+<div class="alert alert-warning col-sm-8">
+  <p id="notice"><%= notice %></p>
+</div>
+<%- end %>
 
 <%= link_to 'New Present', new_present_path, class: 'btn btn-primary btn-lg new-present' %>
 
@@ -18,9 +22,12 @@
     <% @presents.each do |present| %>
       <tr>
         <td><%= link_to present.title, present %></td>
-        <td><%= link_to present.price, present %></td>
-        <td><%= link_to 'Edit', edit_present_path(present), class: 'edit-link' %></td>
-        <td><%= link_to 'Delete', '#', class: 'delete-link', data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (present.price.present? ? number_to_currency(present.price) : '~'), present %></td>
+        <td><%= link_to 'Edit', edit_present_path(present), class: 'btn btn-primary btn-xs edit-link' %></td>
+        <td><%= form_tag(present, method: 'delete') do
+                  submit_tag 'Delete', class: 'btn btn-danger btn-xs delete-link',
+                              data: { confirm: 'Are you sure?' }
+                end %></td>
       </tr>
     <% end %>
   </tbody>
