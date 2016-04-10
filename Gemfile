@@ -42,8 +42,11 @@ group :development do
   # gem 'sqlite3'
 end
 
-# For log viewing on Heroku
-gem 'rails_12factor', group: :production
+group :production do
+  # For log viewing on Heroku
+  gem 'rails_12factor'
+  # Will prevent loading of local resources in development mode
+  gem 'secure_headers'
+end
 
-gem 'secure_headers'
 gem 'omniauth-facebook'
