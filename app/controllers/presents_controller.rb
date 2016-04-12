@@ -5,7 +5,9 @@ class PresentsController < ApplicationController
   # GET /presents
   # GET /presents.json
   def index
-    @presents = Present.where(user: current_user)
+    # set user to either the one specified in the url or the current user
+    user = (url_user.present? ? User.find(url_user) : current_user)
+    @presents = Present.where(user: user)
   end
 
   # GET /presents/1
@@ -29,7 +31,7 @@ class PresentsController < ApplicationController
 
     respond_to do |format|
       if create_present
-        format.html { redirect_to @present, notice: 'Present was successfully created.' }
+        format.html { redirect_to presents_url, notice: 'Present was successfully created.' }
         format.json { render :show, status: :created, location: @present }
       else
         format.html { render :new }
@@ -43,7 +45,7 @@ class PresentsController < ApplicationController
   def update
     respond_to do |format|
       if @present.update(present_params)
-        format.html { redirect_to @present, notice: 'Present was successfully updated.' }
+        format.html { redirect_to presents_url, notice: 'Present was successfully updated.' }
         format.json { render :show, status: :ok, location: @present }
       else
         format.html { render :edit }
@@ -78,8 +80,16 @@ class PresentsController < ApplicationController
     redirect_to root_url unless @present.user == current_user
   end
 
+  def url_user
+    return present_list_params['user_id'] if /\A\d+\z/.match(present_list_params['user_id'])
+  end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def present_params
     params.require(:present).permit(:title, :description, :url, :price)
+  end
+
+  def present_list_params
+    params.permit(:user_id)
   end
 end
