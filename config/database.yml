@@ -6,8 +6,6 @@ default: &default
 development:
   <<: *default
   database: presents_development
-  username: <%= ENV['PRESENT_DATABASE_DEV_USER'] %>
-  password: <%= ENV['PRESENT_DATABASE_DEV_PASSWORD'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -15,8 +13,6 @@ development:
 test:
   <<: *default
   database: presents_test
-  username: <%= ENV['PRESENT_DATABASE_TEST_USER'] %>
-  password: <%= ENV['PRESENT_DATABASE_TEST_PASSWORD'] %>
 
 # Use DATABASE_URL environment variable in production:
 # http://edgeguides.rubyonrails.org/configuring.html#connection-preference
